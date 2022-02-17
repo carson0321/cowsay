@@ -1,0 +1,43 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
+Format: 1.8
+Date: Thu, 17 Feb 2022 21:08:25 +0800
+Source: cowsay
+Architecture: source
+Version: 3.03+dfsg2-8
+Distribution: focal
+Urgency: medium
+Maintainer: James McDonald <james@jamesmcdonald.com>
+Changed-By: carson.wang <kiki86151@hotmail.com>
+Changes:
+ cowsay (3.03+dfsg2-8) focal; urgency=medium
+ .
+   * This is Carson's cowsay testing package
+Checksums-Sha1:
+ 6070e41cfa1c5ce913db1b6f22294c299d3e733b 1772 cowsay_3.03+dfsg2-8.dsc
+ 984ccceaf7bde3cf532345ab681fc92bee4f842e 13604 cowsay_3.03+dfsg2-8.debian.tar.xz
+ 4d14373cce67a2a8a458ee096d6ef6b33cd4c0dc 7032 cowsay_3.03+dfsg2-8_source.buildinfo
+Checksums-Sha256:
+ 8eec45705b4e7a653be70884a8024d81f4d80b5b0a4473a419815abc9fb8f613 1772 cowsay_3.03+dfsg2-8.dsc
+ b53326649297cb1e0dbe014d59c6e9f1f038701ab37146c918a95f102e0d111c 13604 cowsay_3.03+dfsg2-8.debian.tar.xz
+ f0730489b77755265ef4d8c3d704999f19df43cae42b531792dd9f89ad12360d 7032 cowsay_3.03+dfsg2-8_source.buildinfo
+Files:
+ 244e17cbe02ab0cb96b7ff555deddf0d 1772 games optional cowsay_3.03+dfsg2-8.dsc
+ 036425cc2bda27fa203cb80829c958c1 13604 games optional cowsay_3.03+dfsg2-8.debian.tar.xz
+ 592ace27c0205ecaaad3211401c8f9ee 7032 games optional cowsay_3.03+dfsg2-8_source.buildinfo
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAEBCgAdFiEEmLigBfruOoAZGE0kHmSe+TP8EmsFAmIOVS0ACgkQHmSe+TP8
+EmulYwwAtddG3oh5l+GkKgBmfjpCgd4QqWTDPq4WT/bD2JyulmLtvEZIy8Y9dHFE
+7vry+zkmd5C8szKS9T6+K2syMJ+oq8qevRRiJgERtP0ZCzhOMZCisW8i4wtB6bgc
+EzUEOGsofTVjuZTJMQFh96EFnEkQ8ULt1L16+jhzihZact8btW81eicIRMHVC0GA
+FU+uJmz3BCONCFP7yQ6kyzl47inqRJhY16AU3PHhK4zXuJb/6lVNwmPzFKUAAG3G
+T/w4hZ/zbJ+1xZUCyIIu/3MUuIGyvhpMieHpLNHrNhhLqvlT0H6V9H9TmHirtW8A
+x1ImSQh58vIMbuO2e+nnJcoJvYAZaPb6GCqeQ93UYiPFnpcgMFdAdxULF52lxCYg
+vPQs0/YWPcYSvr881FIzSQcTOAHAZR2YB2oIc/nIroPPv8htNNMa4ye5MBgPy7ZG
+y6XVxFykqxoloQTwYbqfrRI4LNbvDac15K9X5umEJvdEC59Imbc6wqwN0NDW7hdL
+eAG6UQFs
+=wEX9
+-----END PGP SIGNATURE-----

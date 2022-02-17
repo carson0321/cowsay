@@ -1,0 +1,35 @@
+Format: 1.8
+Date: Thu, 17 Feb 2022 21:08:25 +0800
+Source: cowsay
+Binary: cowsay cowsay-off
+Architecture: source all
+Version: 3.03+dfsg2-8
+Distribution: focal
+Urgency: medium
+Maintainer: James McDonald <james@jamesmcdonald.com>
+Changed-By: carson.wang <kiki86151@hotmail.com>
+Description:
+ cowsay     - configurable talking cow
+ cowsay-off - configurable talking cow (offensive cows)
+Changes:
+ cowsay (3.03+dfsg2-8) focal; urgency=medium
+ .
+   * This is Carson's cowsay testing package
+Checksums-Sha1:
+ eceb6944ba06d0cdf9cd8ba25a5f0411a7dd64c5 1063 cowsay_3.03+dfsg2-8.dsc
+ 984ccceaf7bde3cf532345ab681fc92bee4f842e 13604 cowsay_3.03+dfsg2-8.debian.tar.xz
+ ff143d5ebb99235841ee04d4ad52284317f37876 7620 cowsay-off_3.03+dfsg2-8_all.deb
+ b51ae4b9f86a915bb0fbef16ef4baaf23ad80d74 20760 cowsay_3.03+dfsg2-8_all.deb
+ fc77a2b702352808ff80b7c08a1f232082a8e84c 6824 cowsay_3.03+dfsg2-8_amd64.buildinfo
+Checksums-Sha256:
+ bc612c6ade3337a8f733403b0916ff04d8953771cbd85d9765542ffe8560b700 1063 cowsay_3.03+dfsg2-8.dsc
+ b53326649297cb1e0dbe014d59c6e9f1f038701ab37146c918a95f102e0d111c 13604 cowsay_3.03+dfsg2-8.debian.tar.xz
+ 448931191c2ceac29ed69f4bb451c8048d85c69d7bac2baba04a034b985230c5 7620 cowsay-off_3.03+dfsg2-8_all.deb
+ 0f30171e2defa196c9fdf3ba09042026d68748568ad9f7b14706f588efec8179 20760 cowsay_3.03+dfsg2-8_all.deb
+ f126bc723122f4a70ff6d16bd37386a039415b9cf22bc5ac39ddecef0b94307d 6824 cowsay_3.03+dfsg2-8_amd64.buildinfo
+Files:
+ 218253a7e1fe89d0d58e37492b0b5f21 1063 games optional cowsay_3.03+dfsg2-8.dsc
+ 036425cc2bda27fa203cb80829c958c1 13604 games optional cowsay_3.03+dfsg2-8.debian.tar.xz
+ 849d32f3b30013e5b611f3a20800c702 7620 games optional cowsay-off_3.03+dfsg2-8_all.deb
+ ef3c5e3bf68462ed85c074ee30328204 20760 games optional cowsay_3.03+dfsg2-8_all.deb
+ e8fd7d82a81a07c1e6254900d3f0cd0d 6824 games optional cowsay_3.03+dfsg2-8_amd64.buildinfo

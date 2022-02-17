@@ -1,0 +1,26 @@
+ dpkg-buildpackage -us -uc -ui -S
+dpkg-buildpackage: info: source package cowsay
+dpkg-buildpackage: info: source version 3.03+dfsg2-8
+dpkg-buildpackage: info: source distribution focal
+dpkg-buildpackage: info: source changed by carson.wang <kiki86151@hotmail.com>
+ dpkg-source --before-build .
+ fakeroot debian/rules clean
+dh clean
+   dh_clean
+ dpkg-source -b .
+dpkg-source: info: using source format '3.0 (quilt)'
+dpkg-source: info: building cowsay using existing ./cowsay_3.03+dfsg2.orig.tar.gz
+dpkg-source: info: using patch list from debian/patches/series
+dpkg-source: info: building cowsay in cowsay_3.03+dfsg2-8.debian.tar.xz
+dpkg-source: info: building cowsay in cowsay_3.03+dfsg2-8.dsc
+ dpkg-genbuildinfo --build=source
+Can't stat /usr/local/etc: No such file or directory
+ at /usr/share/perl5/Dpkg/Vendor/Debian.pm line 469.
+ dpkg-genchanges --build=source >../cowsay_3.03+dfsg2-8_source.changes
+dpkg-genchanges: info: not including original source code in upload
+ dpkg-source --after-build .
+dpkg-buildpackage: info: binary and diff upload (original source NOT included)
+Now running lintian cowsay_3.03+dfsg2-8_source.changes ...
+W: cowsay source: debian-watch-file-missing-version
+W: cowsay source: maintainer-script-lacks-debhelper-token debian/postinst
+Finished running lintian.

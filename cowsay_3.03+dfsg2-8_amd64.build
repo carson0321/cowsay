@@ -1,0 +1,66 @@
+ dpkg-buildpackage -us -uc -ui
+dpkg-buildpackage: info: source package cowsay
+dpkg-buildpackage: info: source version 3.03+dfsg2-8
+dpkg-buildpackage: info: source distribution focal
+dpkg-buildpackage: info: source changed by carson.wang <kiki86151@hotmail.com>
+ dpkg-source --before-build .
+dpkg-buildpackage: info: host architecture amd64
+ fakeroot debian/rules clean
+dh clean
+   dh_clean
+ dpkg-source -b .
+dpkg-source: info: using source format '3.0 (quilt)'
+dpkg-source: info: building cowsay using existing ./cowsay_3.03+dfsg2.orig.tar.gz
+dpkg-source: info: using patch list from debian/patches/series
+dpkg-source: info: building cowsay in cowsay_3.03+dfsg2-8.debian.tar.xz
+dpkg-source: info: building cowsay in cowsay_3.03+dfsg2-8.dsc
+ debian/rules build
+dh build
+   dh_update_autotools_config
+   dh_autoreconf
+   create-stamp debian/debhelper-build-stamp
+ fakeroot debian/rules binary
+dh binary
+   dh_testroot
+   dh_prep
+   debian/rules override_dh_auto_install
+make[1]: Entering directory '/home/carson.wang/code/test/canonical/cowsay-3.03+dfsg2'
+install -D /home/carson.wang/code/test/canonical/cowsay-3.03+dfsg2/cowsay /home/carson.wang/code/test/canonical/cowsay-3.03+dfsg2/debian/cowsay/usr/games/cowsay
+install -d /home/carson.wang/code/test/canonical/cowsay-3.03+dfsg2/debian/cowsay/usr/share/cowsay
+cp -a /home/carson.wang/code/test/canonical/cowsay-3.03+dfsg2/cows /home/carson.wang/code/test/canonical/cowsay-3.03+dfsg2/debian/cowsay/usr/share/cowsay
+install -d /home/carson.wang/code/test/canonical/cowsay-3.03+dfsg2/debian/cowsay-off/usr/share/cowsay/cows
+mv /home/carson.wang/code/test/canonical/cowsay-3.03+dfsg2/debian/cowsay/usr/share/cowsay/cows/bong.cow /home/carson.wang/code/test/canonical/cowsay-3.03+dfsg2/debian/cowsay/usr/share/cowsay/cows/beavis.zen.cow /home/carson.wang/code/test/canonical/cowsay-3.03+dfsg2/debian/cowsay/usr/share/cowsay/cows/mutilated.cow /home/carson.wang/code/test/canonical/cowsay-3.03+dfsg2/debian/cowsay-off/usr/share/cowsay/cows
+rm /home/carson.wang/code/test/canonical/cowsay-3.03+dfsg2/debian/cowsay/usr/share/cowsay/cows/mech-and-cow
+rm /home/carson.wang/code/test/canonical/cowsay-3.03+dfsg2/debian/cowsay/usr/share/cowsay/cows/head-in.cow
+make[1]: Leaving directory '/home/carson.wang/code/test/canonical/cowsay-3.03+dfsg2'
+   dh_install
+   dh_installdocs
+   dh_installchangelogs
+   dh_installexamples
+   dh_installman
+   dh_perl
+   dh_link
+   dh_strip_nondeterminism
+   dh_compress
+   dh_fixperms
+   dh_missing
+   dh_installdeb
+   dh_gencontrol
+   dh_md5sums
+   dh_builddeb
+dpkg-deb: building package 'cowsay-off' in '../cowsay-off_3.03+dfsg2-8_all.deb'.
+dpkg-deb: building package 'cowsay' in '../cowsay_3.03+dfsg2-8_all.deb'.
+ dpkg-genbuildinfo
+Can't stat /usr/local/etc: No such file or directory
+ at /usr/share/perl5/Dpkg/Vendor/Debian.pm line 469.
+ dpkg-genchanges  >../cowsay_3.03+dfsg2-8_amd64.changes
+dpkg-genchanges: info: not including original source code in upload
+ dpkg-source --after-build .
+dpkg-buildpackage: info: binary and diff upload (original source NOT included)
+Now running lintian cowsay_3.03+dfsg2-8_amd64.changes ...
+W: cowsay: binary-without-manpage usr/bin/testing.sh
+W: cowsay source: debian-watch-file-missing-version
+W: cowsay source: maintainer-script-lacks-debhelper-token debian/postinst
+W: cowsay: package-section-games-but-has-usr-bin
+W: cowsay: script-with-language-extension usr/bin/testing.sh
+Finished running lintian.

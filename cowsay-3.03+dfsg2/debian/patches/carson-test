@@ -1,0 +1,16 @@
+Description: This is Carson's cowsay testing package
+Origin: vendor, <url of original patch>
+Bug: <url in upstream bugtracker>
+Bug-Debian: https://bugs.debian.org/<bugnumber>
+Bug-Ubuntu: https://launchpad.net/bugs/<bugnumber>
+Forwarded: no
+Reviewed-By: <name and email of someone who approved the patch>
+Last-Update: 2022-02-17
+
+--- /dev/null
++++ cowsay-3.03+dfsg2/testing.sh
+@@ -0,0 +1,4 @@
++#!/bin/bash
++set -e
++echo "this is a test from Kai Sheng Wang"
++exit 0
