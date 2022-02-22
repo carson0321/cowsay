@@ -1,6 +1,6 @@
 # Debian Packages testing
 
-If we want to install some packages that source codes are modified by us, this guide will teach you how to do it.
+If we want to install some packages that source codes are modified by us, this guide will you teach how to do it.
 
 ## Environment
 
@@ -18,11 +18,19 @@ Codename:       focal
 
 ![result2](./img/result2.png)
 
+## Summary
+
+* `pull-lp-source cowsay focal` or `apt source cowsay`
+* Edit `debian/install` and `debian/postinst`
+* `dpkg-source --commit` and `dch -i`
+* `debuild -us -uc -S` and `debsign -k MY_GPG_KEY *_source.changes`
+* `dput ppa:<USER_ID>/<PPA_REPO> *_source.changes`
+
 ## Guide
 
-First, we must install some necessary packages by typing `sudo apt install devscripts build-essentials fakeroot gnupg gpg dput dh-make lintian git make`. It provides lots of useful tools for building and packing software libraries. This task is based on Debian packages concepts, so we have to pick one existing Debian package to test it. We can find it to download from [Ubuntu archive](https://packaging.ubuntu.com/), [Debian archive](https://www.debian.org/distrib/packages), or [GNU FTP website](https://ftp.gnu.org/) and so on.
+First, we must install some necessary packages by typing `sudo apt install devscripts build-essentials fakeroot gnupg gpg dput dh-make lintian git make`. It provides lots of useful tools for building and packing software libraries. This task is based on Debian packages concepts, so we have to pick one existing Debian package to test it. We can find it to download from [Ubuntu archive](https://packaging.ubuntu.com/), [Debian archive](https://www.debian.org/distrib/packages), or [GNU FTP](https://ftp.gnu.org/) and so on.
 
-I choose [cowsay](https://packages.ubuntu.com/focal/cowsay) package to do this experiment. To start with, we use `apt source` command if we want to get its source code. [APT](https://en.wikipedia.org/wiki/APT_(software)) is a free-software user interface that works with core libraries to handle the installation and removal of software on Debian, and Debian-based Linux distribution. It's noteworthy that we have to add their source URL into `/etc/apt/sources.list` or `/etc/apt/sources.list.d/`, but otherwise it's possible to be not found.
+I choose [cowsay](https://packages.ubuntu.com/focal/cowsay) package to do this experiment. To start with, we use the `apt source` command if we want to get its source code. [APT](https://en.wikipedia.org/wiki/APT_(software)) is a free-software user interface that works with core libraries to handle the installation and removal of software on Debian, and Debian-based Linux distribution. It's noteworthy that we have to add their source URL into `/etc/apt/sources.list` or `/etc/apt/sources.list.d/`, but otherwise it's possible to be not found.
 
 The result is as shown below.
 
@@ -81,9 +89,7 @@ drwxrwxr-x  5 carson.wang carson.wang  4096 Feb 17 20:50 cowsay-3.03+dfsg2
 -rw-r--r--  1 carson.wang carson.wang 14406 Dec 30  2016 cowsay_3.03+dfsg2.orig.tar.gz
 ```
 
-We can also use other ways. For example, it's simple to get a source code of Debian package via [pull-lp-source](https://manpages.ubuntu.com/manpages/focal/man1/pull-lp-source.1.html) command.
-
-The result is also as shown below. It's the same as the above.
+We can also use other ways. For example, it's simple to get a source code of Debian package via [pull-lp-source](https://manpages.ubuntu.com/manpages/focal/man1/pull-lp-source.1.html) command. The result is also as shown below. It's the same as the above.
 
 ```bash
 # sudo apt install ubuntu-dev-tools
@@ -131,7 +137,7 @@ drwxrwxr-x  5 carson.wang carson.wang  4096 Feb 17 20:49 cowsay-3.03+dfsg2
 -rw-rw-r--  1 carson.wang carson.wang 14406 Feb 17 20:49 cowsay_3.03+dfsg2.orig.tar.gz
 ```
 
-According to the result, it will generate some files in the current directory. The `*.orig.tar.gz` file is a upstream source. The `*.debian.tar.xz` file is a custom source with the Debian changes. The `*.dsc` file is metadata. Now, we obtain a source code of cowsay with 3.03+dfsg2-7 version and begin entering into the directory of its source code to implement requirements. I write a simple script(`my_script.sh`) to generate related files automatically. When typing `bash my_script.sh`, it will be done. In the following, I will explain its purpose step by step.
+According to the result, it will generate some files in the current directory. The `*.orig.tar.gz` file is an upstream source. The `*.debian.tar.xz` file is a custom source with the Debian changes. The `*.dsc` file is metadata. Now, we obtain a source code of cowsay with `3.03+dfsg2-7` version and begin entering into the directory of its source code to implement requirements. I write a simple script(`my_script.sh`) to generate related files automatically. When typing `bash my_script.sh`, it will be done. In the following, I will explain its purpose step by step.
 
 ```bash
 #!/bin/bash
@@ -141,7 +147,7 @@ echo "testing.sh usr/bin" >> debian/install
 echo -e '#!/bin/bash\nset -e\nbash testing.sh\nexit 0' > debian/postinst
 ```
 
-There're some commands in my script. The `cd` command means this script will enter into the target directory to execute some operations. It executes the `echo` command to new some files. The `echo` command with `-e` parameter means it enables interpretation of backslash escapes. And, the `>` symbol means it will overwrite the existing file if it exists. The `>>` means it will append to an existing file if it exists. It's fine to use a text editor such as vim to modify related files. For instance, we can type `vim testing.sh` command to open vim with normal mode, and switch to insert mode by typing `i` character. When going into insert mode, it can be modified something in these files. Besides `testing.sh` file, there're also two important files which named `debian/install` and `debian/postinst` respectively. The `debian/install` file controls which files get installed where for this package. When installing successfully, it will print the expected result using `dpkg -S testing.sh; testing.sh` commands.
+There're a few commands in my script. The `cd` command means this script will enter into the target directory to execute some operations. It executes the `echo` command to create some files. The `echo` command with `-e` parameter means it enables interpretation of backslash escapes. And, the `>` symbol means it will overwrite the existing file if it exists. The `>>` means it will append to an existing file. It's fine to use a text editor such as vim to modify related files. For instance, we can type `vim testing.sh` command to open vim with normal mode, and switch to insert mode by typing `i` character. When going into insert mode, it can be modified something in these files. Besides `testing.sh` file, there're also two important files which named `debian/install` and `debian/postinst` respectively. The `debian/install` file controls which files get installed where for this package. When installing successfully, it will print the expected result using `dpkg -S testing.sh; testing.sh` commands.
 
 Moreover, the `debian/postinst` file is run after the installation of the package has been completed. If we want to specify a result that runs prior to installing the contents of the package, we can create `debian/preinst`. Since it has to execute `testing.sh` to get the expected result during the Debian package installation time, I use `debian/postinst` script to achieve this.
 
@@ -165,7 +171,7 @@ bash testing.sh
 exit 0
 ```
 
-Although this source code has been modified, we have to type `dch -i` to increase the Debian release number and add a new changelog entry before packing this. It will add a new comment line to the Debian changelog in the current source tree. This command must be run from within that tree. If the text of the change is given on the command line, `debchange` will run in batch mode and simply add the text, with line breaks as necessary, at the appropriate place in `debian/changelog`. After adding a new changelog entry, we must also type `dpkg-source --commit` to generate a patch corresponding to the local changes. If there're changes with no patch, it will fail to automate the build activity around executing the `dpkg-buildpackage` command package further with the `debuild` command. The `debuild` command with `-us -uc` parameters means it doesn't sign with gpg key to autobuild this package. It will also generate `*.change`, `*.build`, `*.buildinfo` and `.deb` until the build of the program is done.
+Although this source code has been modified, it's unable to build it into the package.We have to type `dch -i` to increase the Debian release number and add a new changelog entry before packing this. It will add a new comment line to the Debian changelog in the current source tree. This command must be run from within that tree. If the text of the change is given on the command line, `debchange` will run in batch mode and simply add the text, with line breaks as necessary, at the appropriate place in `debian/changelog`. After adding a new changelog entry, we must also type `dpkg-source --commit` to generate a patch corresponding to the local changes. If there're changes with no patch, it will fail to automate the build activity around executing the `dpkg-buildpackage` command package further with the `debuild` command. The `debuild` command with `-us -uc` parameters means it doesn't sign with gpg key to auto build this package. It will generate `*.change`, `*.build`, `*.buildinfo` and `.deb` until the build of the program is done.
 
 ```bash
 $ head -10 debian/changelog
@@ -277,9 +283,9 @@ W: cowsay: script-with-language-extension usr/bin/testing.sh
 Finished running lintian.
 ```
 
-And after that, we can install modified package using `sudo dpkg -i XXX.deb`. It will print the expected result. But if we want to install it through [PPA](https://launchpad.net/ubuntu/+ppas), we will operate other commands. Suppose we have a PPA account, it's necessary to upload related files, including `*_source.changes`, to PPA. We can generate it using `debuild -us -uc -S` command. In addition, these files have to sign with the signatures by GPG key in order to publish modified source code to PPA. An important detail is that PPA can only use our master key to complete the package or to be precise, we can only use the master key to sign the package to be distributed, after uploading, PPA can correctly verify the validity of the package. Because PPA doesn't accept subkeys when registering our GPG public key. We can do it as long as we type `debsign -k MY_GPG_KEY *_source.changes` command. Furthermore, it's not a difficult way to generate a new PGP key and sign in PPA server. In general, we can type `gpg --gen-key` command, it will guide you in generating a new PGP key. For more detailed information about this, kindly visit the [PPA website](https://help.launchpad.net/Packaging/PPA/InstallingSoftware).
+And after that, we can install the modified package using `sudo dpkg -i XXX.deb`. It will print the expected result. But if we want to install it through [PPA](https://launchpad.net/ubuntu/+ppas), we will operate other commands. Suppose we have a PPA account, it's necessary to upload related files, including `*_source.changes`, to PPA. We can generate it using `debuild -us -uc -S` command. In addition, these files have to sign with the signatures by GPG key in order to publish modified source code to PPA. An important detail is that PPA can only use our master key to complete the package or to be precise, we can only use the master key to sign the package to be distributed, after uploading, PPA can correctly verify the validity of the package. Because PPA doesn't accept subkeys when registering our GPG public key. We can do it as long as we type `debsign -k MY_GPG_KEY *_source.changes` command. Furthermore, it's not a difficult way to generate a new PGP key and sign in PPA server. In general, we can type `gpg --gen-key` command, it will guide us in generating a new PGP key. For more detailed information about this, kindly visit the [PPA website](https://help.launchpad.net/Packaging/PPA/InstallingSoftware).
 
- When finishing these steps, we can use the tool `dput` provided by Debian. It will push the distribution package to a public server. In other words, we upload our modified source code by typing `dput ppa:<USER_ID>/<PPA_REPO> *_source.changes` command, and afterwards PPA's server will send an email to us. When receiving an email with the accepted result, it doesn't represent that we can install our package from PPA. We have to wait for a little time. After a while, its status will be set published. Finally, we can install the modified package by typing `sudo add-apt-repository ppa:<USER_ID>/<PPA_REPO>`, `sudo apt update`, `sudo apt install` commands.
+When finishing these steps, we can use the tool `dput` provided by Debian. It will push the distribution package to a public server. In other words, we upload our modified source code by typing `dput ppa:<USER_ID>/<PPA_REPO> *_source.changes` command, and afterwards PPA's server will send an email to us. When receiving an email with the accepted result, it doesn't represent that we can install our package from PPA. We have to wait for a little time. After a while, its status will be set published. Finally, we can install the modified package by typing `sudo add-apt-repository ppa:<USER_ID>/<PPA_REPO>`, `sudo apt update`, `sudo apt install` commands.
 
 ```bash
 $ debuild -us -uc -S
@@ -337,7 +343,7 @@ Uploading to ppa (via ftp to ppa.launchpad.net):
 Successfully uploaded packages.
 ```
 
-Regarding Git hosting repository, it's also easy to implement it. If we have a github/gitlab account, then we just use `git` command to achieve it. Typically, we can execute `git add .`, `git commit -m MEEAGE` and `git push` sequentially if it exists a repository (`git clone`). After executing the following commands, it will host. If we want to connect to github/gitlab without a password, we can use SSH key. For more detailed information about this, please refer to the [Github website](https://docs.github.com/en/authentication/connecting-to-github-with-ssh).
+Regarding the Git hosting repository, it's also easy to implement. If we have a Github/Gitlab account, then we just use the `git` command to achieve it. Typically, we can execute `git add .`, `git commit -m MEEAGE`, and `git push` sequentially if it exists a repository (`git clone`). The `git add` command means it updates the index using the current content found in the working tree, to prepare the content staged for the next commit. The `git commit` command means it stores the current contents of the index in a new commit along with a log message from the user describing the changes. Finally, the `git push` command means it updates remote refs using local refs while sending objects necessary to complete the given refs. After executing the following commands, it will host. We can also use an SSH key to connect to GitHub/GitLab without a password. For more detailed information about this, please refer to the [Github website](https://docs.github.com/en/authentication/connecting-to-github-with-ssh).
 
 ## Referenses
 
